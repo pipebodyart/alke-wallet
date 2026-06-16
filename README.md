@@ -75,4 +75,4 @@ alke-wallet/
 
 ## 👤 Autor
 
-Sebastián Faría — Proyecto educativo, 2026.
+Felipe Farías — Proyecto, 2026.
