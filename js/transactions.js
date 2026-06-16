@@ -12,16 +12,23 @@ $(function () {
   });
 
   let currentFilter = "all";
+  let searchTerm = "";
 
   renderSummary();
-  renderTable(currentFilter);
+  renderTable();
 
-  // Filtros
+  // Filtros por tipo
   $(".filter-btn").on("click", function () {
     $(".filter-btn").removeClass("active");
     $(this).addClass("active");
     currentFilter = $(this).data("filter");
-    renderTable(currentFilter);
+    renderTable();
+  });
+
+  // Buscador por descripción o contacto
+  $("#txSearch").on("input", function () {
+    searchTerm = $(this).val().trim().toLowerCase();
+    renderTable();
   });
 
   /* ---------- Resumen ---------- */
@@ -42,9 +49,17 @@ $(function () {
   }
 
   /* ---------- Tabla ---------- */
-  function renderTable(filter) {
+  function renderTable() {
     let tx = AlkeData.getTransactions().slice().reverse(); // más recientes primero
-    if (filter !== "all") tx = tx.filter((t) => t.type === filter);
+    if (currentFilter !== "all") tx = tx.filter((t) => t.type === currentFilter);
+
+    // Búsqueda por texto en descripción o contacto
+    if (searchTerm) {
+      tx = tx.filter((t) =>
+        (t.description || "").toLowerCase().includes(searchTerm) ||
+        (t.contact || "").toLowerCase().includes(searchTerm)
+      );
+    }
 
     const $body = $("#txTableBody").empty();
 
