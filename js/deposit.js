@@ -29,6 +29,11 @@ $(function () {
     $("#amount").val(current + $(this).data("val")).trigger("focus");
   });
 
+  // Botón "Máximo" (solo en retiro): rellena con todo el saldo disponible
+  $("#maxBtn").on("click", function () {
+    $("#amount").val(AlkeData.getBalance()).removeClass("is-invalid").trigger("focus");
+  });
+
   // Envío del formulario
   $("#depositForm").on("submit", function (e) {
     e.preventDefault();
@@ -72,6 +77,8 @@ $(function () {
     $(`#opTabs .nav-link[data-op="${op}"]`).addClass("active");
 
     const isDeposit = op === "deposit";
+    // El botón "Máximo" solo aplica al retirar
+    $("#maxBtn").toggleClass("d-none", isDeposit);
     $("#amountLabel").text(isDeposit ? "Monto a depositar (CLP)" : "Monto a retirar (CLP)");
     $("#submitBtn")
       .text(isDeposit ? "Realizar depósito" : "Realizar retiro")
