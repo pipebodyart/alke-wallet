@@ -16,7 +16,7 @@ const AlkeData = (() => {
 
   // Usuario de demostración (credenciales de prueba)
   const DEMO_USER = {
-    name: "Sebastián Faría",
+    name: "Felipe Farías",
     email: "usuario@alke.com",
     password: "alke1234",
   };
