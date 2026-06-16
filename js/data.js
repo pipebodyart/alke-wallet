@@ -23,9 +23,10 @@ const AlkeData = (() => {
 
   /* ---------- Inicialización / Seed de datos ---------- */
   function seed() {
-    if (!localStorage.getItem(KEYS.user)) {
-      localStorage.setItem(KEYS.user, JSON.stringify(DEMO_USER));
-    }
+    // El usuario demo es autoritativo desde el código: se sincroniza
+    // en cada carga para que cambios de nombre/correo se reflejen
+    // aunque ya exista un valor antiguo guardado en localStorage.
+    localStorage.setItem(KEYS.user, JSON.stringify(DEMO_USER));
     if (localStorage.getItem(KEYS.balance) === null) {
       localStorage.setItem(KEYS.balance, "1250000"); // saldo inicial CLP
     }
@@ -160,6 +161,22 @@ const AlkeData = (() => {
 
   // Ejecuta el seed apenas se carga el script
   seed();
+
+  // Rellena automáticamente cualquier elemento del HTML que use
+  // data-alke="name" | "firstname" | "email" con los datos del usuario.
+  // Así el nombre (Felipe) aparece en todas las páginas sin código extra.
+  function fillUserPlaceholders() {
+    const user = getUser();
+    if (!user) return;
+    document.querySelectorAll('[data-alke="name"]').forEach((el) => (el.textContent = user.name));
+    document.querySelectorAll('[data-alke="firstname"]').forEach((el) => (el.textContent = user.name.split(" ")[0]));
+    document.querySelectorAll('[data-alke="email"]').forEach((el) => (el.textContent = user.email));
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", fillUserPlaceholders);
+  } else {
+    fillUserPlaceholders();
+  }
 
   return {
     DEMO_USER,
