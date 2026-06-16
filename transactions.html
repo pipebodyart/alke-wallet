@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movimientos · Alke Wallet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-alke">
+    <div class="container">
+      <a class="navbar-brand brand-logo" href="menu.html">Alke<span>Wallet</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="menu.html"><i class="bi bi-house me-1"></i>Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="deposit.html"><i class="bi bi-cash-coin me-1"></i>Depositar</a></li>
+          <li class="nav-item"><a class="nav-link" href="sendmoney.html"><i class="bi bi-send me-1"></i>Enviar</a></li>
+          <li class="nav-item"><a class="nav-link active" href="transactions.html"><i class="bi bi-clock-history me-1"></i>Movimientos</a></li>
+          <li class="nav-item ms-lg-3">
+            <button id="logoutBtn" class="btn btn-sm btn-outline-light"><i class="bi bi-box-arrow-right me-1"></i>Salir</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-4 fade-in">
+    <h4 class="mb-4">Historial de transacciones</h4>
+
+    <!-- Resumen -->
+    <div class="row g-3 mb-4">
+      <div class="col-6 col-md-3">
+        <div class="card card-alke p-3">
+          <small class="text-muted">Saldo actual</small>
+          <div class="h5 mb-0" id="sumBalance">$0</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card card-alke p-3">
+          <small class="text-muted">Total ingresos</small>
+          <div class="h5 mb-0 amount-in" id="sumIn">$0</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card card-alke p-3">
+          <small class="text-muted">Total egresos</small>
+          <div class="h5 mb-0 amount-out" id="sumOut">$0</div>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card card-alke p-3">
+          <small class="text-muted">N° movimientos</small>
+          <div class="h5 mb-0" id="sumCount">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Filtros -->
+    <div class="card card-alke mb-4">
+      <div class="card-body">
+        <div class="d-flex flex-wrap gap-2 align-items-center">
+          <span class="text-muted me-2 small">Filtrar:</span>
+          <button class="btn btn-sm btn-outline-secondary filter-btn active" data-filter="all">Todos</button>
+          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="deposit">Depósitos</button>
+          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="withdraw">Retiros</button>
+          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="send">Envíos</button>
+          <button class="btn btn-sm btn-outline-secondary filter-btn" data-filter="receive">Recepciones</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabla de movimientos -->
+    <div class="card card-alke">
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table align-middle mb-0">
+            <thead>
+              <tr class="text-muted small text-uppercase">
+                <th>Tipo</th>
+                <th>Descripción</th>
+                <th>Contacto</th>
+                <th>Fecha</th>
+                <th class="text-end">Monto</th>
+              </tr>
+            </thead>
+            <tbody id="txTableBody"></tbody>
+          </table>
+        </div>
+        <p id="emptyMsg" class="text-muted text-center py-4 mb-0 d-none">No hay movimientos para este filtro.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="alke-footer text-center">
+    Alke Wallet © 2026 · Proyecto educativo Módulo 2
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/transactions.js"></script>
+</body>
+</html>

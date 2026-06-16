@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alke Wallet</title>
+  <script src="js/data.js"></script>
+  <script>
+    // Punto de entrada: redirige según el estado de sesión
+    if (AlkeData.isLoggedIn()) {
+      window.location.replace("menu.html");
+    } else {
+      window.location.replace("login.html");
+    }
+  </script>
+</head>
+<body>
+  <p>Cargando Alke Wallet…</p>
+</body>
+</html>
