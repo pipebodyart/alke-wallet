@@ -13,6 +13,14 @@ $(function () {
   const $form = $("#loginForm");
   const $error = $("#loginError");
 
+  // "Recordarme": si hay un correo guardado, se precarga al abrir el login
+  const rememberedEmail = localStorage.getItem("alke_remember");
+  if (rememberedEmail) {
+    $("#email").val(rememberedEmail);
+    $("#remember").prop("checked", true);
+    $("#password").focus();
+  }
+
   // Mostrar / ocultar contraseña
   $("#togglePass").on("click", function () {
     const $pass = $("#password");
@@ -45,6 +53,13 @@ $(function () {
     }
 
     if (!valid) return;
+
+    // Guardar o limpiar el correo según la casilla "Recordarme"
+    if ($("#remember").is(":checked")) {
+      localStorage.setItem("alke_remember", email);
+    } else {
+      localStorage.removeItem("alke_remember");
+    }
 
     // Validación de credenciales
     if (AlkeData.login(email, password)) {
